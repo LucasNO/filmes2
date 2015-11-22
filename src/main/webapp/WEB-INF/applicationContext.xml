@@ -72,7 +72,14 @@
     <bean id="classificacaoDAO" class="com.lab6.filme2.dao.ClassificacaoDAO">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
+    <bean id="permissaoDao" class="com.lab6.filme2.dao.PermissaoDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
     
+    <bean id="usuarioDao" class="com.lab6.filme2.dao.UsuarioDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+        <property name="permissaoDao" ref="permissaoDao" />
+    </bean>    
     <bean id="filmesDAO" class="com.lab6.filme2.dao.FilmeDAO">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
@@ -88,5 +95,7 @@
     <bean id="filmesBO" class="com.lab6.filme2.service.FilmesBO">
         <property name="filmesDAO" ref="filmesDAO" />
     </bean>
-
+    <bean id="segurancaBO" class="com.lab6.filme2.service.SegurancaBOImpl">
+        <property name="usuarioDao" ref="usuarioDao"/>
+     </bean>
 </beans>

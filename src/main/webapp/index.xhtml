@@ -1,13 +1,45 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition template="/template/common/commonLayout.xhtml"
-                xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:p="http://primefaces.org/ui"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    <ui:define name="corpo">
-        
-    </ui:define>
-</ui:composition>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <h:body>
+        <h:form>
+            <ui:composition template="/template/common/commonLayout.xhtml">
+                <ui:define name="header">
+                    <h1>Home</h1>
+                </ui:define>
+
+                <ui:define name="content">
+                    <h:commandLink id="login" value="Login" action="/login?faces-redirect=true" immediate="true" rendered="#{empty request.userPrincipal}"/> <br/>
+                    <h:outputText id="usuario" value="Usuário: #{request.userPrincipal.name}" rendered="#{not empty request.userPrincipal}"/> <br/>
+                    <h:commandLink id="listarGenero" value="Listar Generos" action="/listarTipos?faces-redirect=true" immediate="true" 
+                        rendered="#{request.isUserInRole('ROLE_ADMIN') or request.isUserInRole('ROLE_USUARIO')}"/>
+                    <br/>
+                    <br/>
+                    <h:commandLink id="listarFilmes" value="Listar Filmes" action="/listarFilmes?faces-redirect=true" immediate="true" 
+                        rendered="#{request.isUserInRole('ROLE_ADMIN') or request.isUserInRole('ROLE_USUARIO')}"/>
+                    <br/>
+                    <br/>
+                    <h:commandLink id="cadastrarFilmes" value="Cadastrar Filmes" action="/cadastroFilme?faces-redirect=true" immediate="true" 
+                        rendered="#{request.isUserInRole('ROLE_ADMIN') or request.isUserInRole('ROLE_USUARIO')}"/>
+                    <br/>
+                    <h:commandLink id="cadastrarGenero" value="Cadastrar Generos" action="/cadastroTipo?faces-redirect=true" immediate="true" 
+                        rendered="#{request.isUserInRole('ROLE_ADMIN')}"/>
+                    <br/>
+                    <br/>
+                    <h:commandLink id="avaliacaoFilme" value="Avaliar Filme" action="/cadastroAvaliacao?faces-redirect=true" immediate="true" 
+                        rendered="#{request.isUserInRole('ROLE_ADMIN') or request.isUserInRole('ROLE_USUARIO')}"/>
+                    <br/>
+                    <h:outputLink value="#{facesContext.externalContext.requestContextPath}/logout">
+                        <h:outputText value="Logout"/>
+                    </h:outputLink>
+                
+                </ui:define>
+
+            </ui:composition>
+        </h:form>
+    </h:body>
+</html>
 
