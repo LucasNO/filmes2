@@ -1,0 +1,32 @@
+<ui:composition template="/template/common/commonLayout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{filmesController.listar}"/>
+    </f:metadata>
+    <ui:define name="corpo">
+
+
+        <h:form>
+            <h1>Lista De Filmes</h1>
+
+            <p:dataTable var="car" value="#{filmesController.resultado}"
+                         rows="5" paginator="true">
+                <p:column headerText="Id">
+                    <h:outputText value="#{car.idfilme}" />
+                </p:column>
+
+                <p:column headerText="Nome">
+                    <h:outputText value="#{car.title}" />
+                </p:column>
+
+                <p:column headerText="Genero">
+                    <h:outputText value="#{car.idclassificacao.tipo}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,55 @@
+<ui:composition template="/template/common/commonLayout.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{tipoController.listar}"/>
+        <f:event type="preRenderView" listener="#{tipoController.novo}"/>
+    </f:metadata>
+    <ui:define name="corpo">
+
+        <h:form id="form">
+            <h:outputText>Lista De Generos</h:outputText>
+
+            <p:growl id="msgs" showDetail="true"/>
+            
+            <p:panelGrid columns="2">
+                <p:outputLabel for="tipo" value="Tipo: " />
+                <p:inputText id="tipo" value="#{tipoController.edicao.tipo}" required="true" />
+            </p:panelGrid>
+
+            <p:commandButton value="Cadastrar" process="@this tipo" action="#{tipoController.salvar}" update="@form"/>
+
+
+            <p:dataTable id="tipoTable" var="car" value="#{tipoController.resultado}"
+                         rows="5" paginator="true" editable="true">
+
+                <p:ajax event="rowEdit" listener="#{tipoController.onRowEdit}" update=":form:msgs" />
+                <p:ajax event="rowEditCancel" listener="#{tipoController.onRowCancel}" update=":form:msgs" />
+
+                <p:column headerText="Id">
+                    <h:outputText value="#{car.idclassificacao}" style="alignment-adjust: central"/>
+                </p:column>
+
+                <p:column headerText="Genero">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{car.tipo}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="modelInput" value="#{car.tipo}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Ação">
+                    <p:commandButton action="#{tipoController.deletar}" icon="ui-icon-close" title="Remover Tipo" update="@form" process="@this" >
+                        <f:setPropertyActionListener
+                            target="#{tipoController.edicao}"
+                            value="#{car}" />
+                    </p:commandButton>
+
+                    <p:rowEditor />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>

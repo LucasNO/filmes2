@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListFilmesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListFilmesEmpty}" rendered="#{filmesController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{filmesController.items.rowCount > 0}">
+                    <h:outputText value="#{filmesController.pagination.pageFirstItem + 1}..#{filmesController.pagination.pageLastItem + 1}/#{filmesController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{filmesController.previous}" value="#{bundle.Previous} #{filmesController.pagination.pageSize}" rendered="#{filmesController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{filmesController.next}" value="#{bundle.Next} #{filmesController.pagination.pageSize}" rendered="#{filmesController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{filmesController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFilmesTitle_idfilme}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idfilme}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFilmesTitle_title}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.title}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListFilmesTitle_idclassificacao}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idclassificacao}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{filmesController.prepareView}" value="#{bundle.ListFilmesViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{filmesController.prepareEdit}" value="#{bundle.ListFilmesEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{filmesController.destroy}" value="#{bundle.ListFilmesDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{filmesController.prepareCreate}" value="#{bundle.ListFilmesCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListFilmesIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

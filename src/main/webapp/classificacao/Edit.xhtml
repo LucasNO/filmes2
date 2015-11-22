@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditClassificacaoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditClassificacaoLabel_idclassificacao}" for="idclassificacao" />
+                    <h:inputText id="idclassificacao" value="#{classificacaoController.selected.idclassificacao}" title="#{bundle.EditClassificacaoTitle_idclassificacao}" required="true" requiredMessage="#{bundle.EditClassificacaoRequiredMessage_idclassificacao}"/>
+                    <h:outputLabel value="#{bundle.EditClassificacaoLabel_tipo}" for="tipo" />
+                    <h:inputText id="tipo" value="#{classificacaoController.selected.tipo}" title="#{bundle.EditClassificacaoTitle_tipo}" required="true" requiredMessage="#{bundle.EditClassificacaoRequiredMessage_tipo}"/>
+                </h:panelGrid>
+                <h:commandLink action="#{classificacaoController.update}" value="#{bundle.EditClassificacaoSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditClassificacaoViewLink}"/>
+                <br />
+                <h:commandLink action="#{classificacaoController.prepareList}" value="#{bundle.EditClassificacaoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditClassificacaoIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

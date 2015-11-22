@@ -1,0 +1,31 @@
+<ui:composition template="/template/common/commonLayout.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{tipoController.listar}"/>
+        <f:event type="preRenderView" listener="#{filmesController.novo}"/>
+    </f:metadata>
+    <ui:define name="corpo">
+        <h:form>
+            <h:outputText>Cadastro De Filmes</h:outputText>
+
+            <p:panelGrid columns="2">
+                <p:outputLabel for="titulo" value="Nome: " />
+                <p:inputText id="titulo" value="#{filmesController.edicao.title}" required="true" />
+            </p:panelGrid>
+            <p:panelGrid columns="2">
+                <p:outputLabel for="classificacao" value="Classificação: " />
+                <p:selectOneMenu id="classificacao" value="#{filmesController.edicao.idclassificacao.idclassificacao}">
+                    <f:selectItems value="#{tipoController.resultado}" var="classificacao" itemLabel="#{classificacao.tipo}" itemValue="#{classificacao.idclassificacao}" />
+                </p:selectOneMenu>
+            </p:panelGrid>
+
+            <p:commandButton value="Cadastrar" process="@all" action="#{filmesController.salvar}"/>
+
+        </h:form>
+    </ui:define>
+</ui:composition>
