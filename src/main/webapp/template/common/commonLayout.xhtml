@@ -29,11 +29,18 @@
                         <p:menuitem id="listarAvaliacao" value="Listar Avaliações" action="/listarAvaliacao?faces-redirect=true" />
                     </p:menuButton>
                 </p:toolbarGroup>
+                <p:toolbarGroup>                
+                            <h:outputLink value="#{facesContext.externalContext.requestContextPath}/logout">
+                            <h:outputText value="Logout"/>
+                            </h:outputLink>&nbsp;
+                            <h:outputText id="usuario" value="Usuário: #{request.userPrincipal.name}" rendered="#{not empty request.userPrincipal}" /> <br/>                                       
+                </p:toolbarGroup>
             </p:toolbar>
         </h:form>
     </h:head>
 
-    <h:body  style="background-image: url('#{resource['imagens/layoutmineda.png']}');">
+    <h:body>
+
         <div id="conteudo">
             <ui:insert name="corpo" />
         </div>
