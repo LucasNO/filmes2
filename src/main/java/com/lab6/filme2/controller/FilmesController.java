@@ -5,10 +5,12 @@ import com.lab6.filme2.model.Filmes;
 import com.lab6.filme2.service.FilmesBO;
 import com.lab6.filme2.web.WebUtils;
 import java.util.List;
-import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -39,6 +41,30 @@ public class FilmesController {
             novo();
         } catch (Throwable t) {
 
+            WebUtils.incluirMensagemErro(WebUtils.recuperarCausa(t));
+        }
+    }
+    
+    public void onRowEdit(RowEditEvent event) {
+        Long id = ((Filmes) event.getObject()).getIdfilme();
+        edicao = filmesBO.pesquisaFilme(id);
+        edicao.setTitle(((Filmes) event.getObject()).getTitle());
+        filmesBO.editarClassificacao(edicao);
+        FacesMessage msg = new FacesMessage("Titulo Editado", ((Filmes) event.getObject()).getTitle());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+     
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edit Cancelled", ((Classificacao) event.getObject()).getTipo());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    public void deletar() {
+        try {
+        filmesBO.removerFilme(edicao.getIdfilme());
+        WebUtils.incluirMensagemInfo("Filme deletado com sucesso!");
+            novo();
+        } catch (Throwable t) {
             WebUtils.incluirMensagemErro(WebUtils.recuperarCausa(t));
         }
     }

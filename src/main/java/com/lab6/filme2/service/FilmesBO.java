@@ -17,6 +17,10 @@ public class FilmesBO {
 	public void salvarFilme(Filmes filme) {
 		filmesDAO.salvar(filme);		
 	}
+        
+        public void editarClassificacao(Filmes filme) {
+		filmesDAO.atualizar(filme);
+	}
 
 	public void removerFilme(Long id) {
 		Filmes filme = filmesDAO.pesquisarPorId(id);

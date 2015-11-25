@@ -40,15 +40,17 @@
                         <f:facet name="input"><p:inputText id="modelInput" value="#{car.tipo}" style="width:100%"/></f:facet>
                     </p:cellEditor>
                 </p:column>
-                <p:column headerText="Ação">
+                <p:column headerText="Alterar">
+                    <p:rowEditor />
+                </p:column>
+                <p:column headerText="Deletar">
                     <p:commandButton action="#{tipoController.deletar}" icon="ui-icon-close" title="Remover Tipo" update="@form" process="@this" >
                         <f:setPropertyActionListener
                             target="#{tipoController.edicao}"
                             value="#{car}" />
                     </p:commandButton>
-
-                    <p:rowEditor />
                 </p:column>
+
             </p:dataTable>
         </h:form>
     </ui:define>

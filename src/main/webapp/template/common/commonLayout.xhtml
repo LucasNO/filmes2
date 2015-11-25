@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <meta charset="UTF-8"/>
@@ -29,11 +28,11 @@
                         <p:menuitem id="listarAvaliacao" value="Listar Avaliações" action="/listarAvaliacao?faces-redirect=true" />
                     </p:menuButton>
                 </p:toolbarGroup>
-                <p:toolbarGroup>                
+                <p:toolbarGroup align="right">                
+                            <h:outputText id="usuario" value="Usuário: #{request.userPrincipal.name}" rendered="#{not empty request.userPrincipal}" /> <br/>                                       
                             <h:outputLink value="#{facesContext.externalContext.requestContextPath}/logout">
                             <h:outputText value="Logout"/>
                             </h:outputLink>&nbsp;
-                            <h:outputText id="usuario" value="Usuário: #{request.userPrincipal.name}" rendered="#{not empty request.userPrincipal}" /> <br/>                                       
                 </p:toolbarGroup>
             </p:toolbar>
         </h:form>
@@ -46,7 +45,6 @@
         </div>
 
         <footer>
-            Lab 6
         </footer>
 
     </h:body>

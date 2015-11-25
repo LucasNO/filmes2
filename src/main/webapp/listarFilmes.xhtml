@@ -12,19 +12,45 @@
 
         <h:form>
             <h1>Lista De Filmes</h1>
+            <p:growl id="msgs" showDetail="true"/>
 
             <p:dataTable var="car" value="#{filmesController.resultado}"
                          rows="5" paginator="true">
+
+                <p:ajax event="rowEdit" listener="#{filmesController.onRowEdit}" update=":form:msgs" />
+                <p:ajax event="rowEditCancel" listener="#{filmesController.onRowCancel}" update=":form:msgs" />
+
                 <p:column headerText="Id">
                     <h:outputText value="#{car.idfilme}" />
                 </p:column>
 
                 <p:column headerText="Nome">
-                    <h:outputText value="#{car.title}" />
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{car.title}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="modelInput" value="#{car.title}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
                 </p:column>
 
                 <p:column headerText="Genero">
-                    <h:outputText value="#{car.idclassificacao.tipo}" />
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{car.idclassificacao.tipo}" /></f:facet>
+                        <f:facet name="input">
+                            <p:selectOneMenu id="classificacao" value="#{filmesController.edicao.idclassificacao.idclassificacao}">
+                                <f:selectItems value="#{tipoController.resultado}" var="classificacao" itemLabel="#{classificacao.tipo}" itemValue="#{classificacao.idclassificacao}" />
+                            </p:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Alterar">
+                    <p:rowEditor />
+                </p:column>
+                <p:column headerText="Deletar">
+                    <p:commandButton action="#{filmesController.deletar}" icon="ui-icon-close" title="Remover Tipo" update="@form" process="@this" >
+                        <f:setPropertyActionListener
+                            target="#{filmesController.edicao}"
+                            value="#{car}" />
+                    </p:commandButton>
                 </p:column>
             </p:dataTable>
         </h:form>
