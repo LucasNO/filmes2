@@ -6,11 +6,12 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <f:metadata>
         <f:event type="preRenderView" listener="#{filmesController.listar}"/>
+        <f:event type="preRenderView" listener="#{filmesController.novo}"/>
     </f:metadata>
     <ui:define name="corpo">
 
 
-        <h:form>
+        <h:form id="form">
             <h1>Lista De Filmes</h1>
             <p:growl id="msgs" showDetail="true"/>
 
