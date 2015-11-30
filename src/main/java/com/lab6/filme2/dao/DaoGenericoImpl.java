@@ -6,8 +6,10 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.data.repository.NoRepositoryBean;
 
-public class DaoGenericoImpl<T, ID extends Serializable> implements DaoGenerico<T, ID> {
+@NoRepositoryBean
+public abstract class DaoGenericoImpl<T, ID extends Serializable> implements DaoGenerico<T, ID> {
 	
 	private final Class<T> oClass;
 	

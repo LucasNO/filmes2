@@ -2,7 +2,9 @@ package com.lab6.filme2.dao;
 
 import java.io.Serializable;
 import java.util.List;
+import org.springframework.data.repository.NoRepositoryBean;
 
+@NoRepositoryBean
 public interface DaoGenerico<T, ID extends Serializable> {
 	
 	public Class<T> getObjectClass();

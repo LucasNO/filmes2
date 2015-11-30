@@ -2,6 +2,7 @@ package com.lab6.filme2.service;
 
 import com.lab6.filme2.dao.AvaliacaoDAO;
 import com.lab6.filme2.model.Avaliacao;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,18 +16,24 @@ public class AvaliacaoBO {
 	private AvaliacaoDAO avaliacaoDAO;
 
 	public void avaliarFilme(Avaliacao avaliacao) {
-		avaliacaoDAO.salvar(avaliacao);
+		avaliacaoDAO.save(avaliacao);
 	}
         public List<Avaliacao> listarClassificacoes() {
-		return avaliacaoDAO.todos();
+            List<Avaliacao> lista = new ArrayList<>();
+            
+            for (Avaliacao item : avaliacaoDAO.findAll()) {
+                lista.add(item);
+            }
+            
+            return lista;
 	}
         
         public void deletarAvaliacao(Avaliacao avaliacao){
-            avaliacaoDAO.excluir(avaliacao);
+            avaliacaoDAO.delete(avaliacao);
         }
         
         public void atualizarAvaliacao(Avaliacao avaliacao){
-            avaliacaoDAO.atualizar(avaliacao);
+            avaliacaoDAO.save(avaliacao);
         }
 
     public AvaliacaoDAO getAvaliacaoDAO() {

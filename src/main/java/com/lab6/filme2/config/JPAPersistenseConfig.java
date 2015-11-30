@@ -81,6 +81,18 @@ public class JPAPersistenseConfig {
 
         return transactionManager;
     }
+    
+//    @Bean
+//    public LocalSessionFactoryBean sessionFactory(PlatformTransactionManager transactionManager) {
+//        
+//        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+//        
+//        sessionFactory.setDataSource(dataSource());
+//        sessionFactory.setPackagesToScan("com.lab6.filme2.model");
+//        sessionFactory.setHibernateProperties(additionalProperties());
+//        
+//        return sessionFactory;
+//    }
 
     @Bean
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {

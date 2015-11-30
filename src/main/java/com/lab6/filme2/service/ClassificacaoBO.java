@@ -2,6 +2,7 @@ package com.lab6.filme2.service;
 
 import com.lab6.filme2.dao.ClassificacaoDAO;
 import com.lab6.filme2.model.Classificacao;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,31 +16,38 @@ public class ClassificacaoBO {
 	private ClassificacaoDAO classificacaoDAO;
 	
 	public void salvarClassificacao(Classificacao classificacao) {
-		classificacaoDAO.salvar(classificacao);
+		classificacaoDAO.save(classificacao);
 	}
 	
 	public void editarClassificacao(Classificacao classificacao) {
-		classificacaoDAO.atualizar(classificacao);
+		classificacaoDAO.save(classificacao);
 	}
 
 	public void removerClassificacao(Long id) {
-		Classificacao classificacao = classificacaoDAO.pesquisarPorId(id);
+		Classificacao classificacao = classificacaoDAO.findOne(id);
 		if (classificacao == null) {
 			throw new RuntimeException("Nao existe classificação com esse id: " + id);
 		}
-		classificacaoDAO.excluir(classificacao);
+		classificacaoDAO.delete(classificacao);
 	}
 
 	public List<Classificacao> listarClassificacoes() {
-		return classificacaoDAO.todos();
+            
+            List<Classificacao> lista = new ArrayList<>();
+            
+            for (Classificacao item : classificacaoDAO.findAll()) {
+                lista.add(item);
+            }
+            
+            return lista;
 	}
         
         public void deletarAvaliacao(Classificacao classificacao){
-            classificacaoDAO.excluir(classificacao);
+            classificacaoDAO.delete(classificacao);
         }
         
         public Classificacao carregarClassificacao(Long id){
-            return classificacaoDAO.pesquisarPorId(id);
+            return classificacaoDAO.findOne(id);
         }
 
     public ClassificacaoDAO getClassificacaoDAO() {

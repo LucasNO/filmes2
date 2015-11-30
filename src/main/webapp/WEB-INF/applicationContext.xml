@@ -4,6 +4,7 @@
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:c="http://www.springframework.org/schema/c"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xmlns:flow="http://www.springframework.org/schema/webflow-config"
        xmlns:jee="http://www.springframework.org/schema/jee"
        xmlns:jms="http://www.springframework.org/schema/jms"
@@ -17,6 +18,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+          http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.2.xsd
           http://www.springframework.org/schema/webflow-config http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.0.xsd
           http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.1.xsd
           http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-4.1.xsd
@@ -29,13 +31,13 @@
     <context:annotation-config />
     <context:component-scan base-package="com.lab6.filme2" />
     
-    <bean id="avaliacaoDAO" class="com.lab6.filme2.dao.AvaliacaoDAO">
+<!--    <bean id="avaliacaoDAO" class="com.lab6.filme2.dao.AvaliacaoDAO">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
     
     <bean id="classificacaoDAO" class="com.lab6.filme2.dao.ClassificacaoDAO">
         <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
+    </bean>-->
     <bean id="permissaoDao" class="com.lab6.filme2.dao.PermissaoDaoImpl">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
@@ -44,9 +46,9 @@
         <property name="sessionFactory" ref="sessionFactory" />
         <property name="permissaoDao" ref="permissaoDao" />
     </bean>    
-    <bean id="filmesDAO" class="com.lab6.filme2.dao.FilmeDAO">
+<!--    <bean id="filmesDAO" class="com.lab6.filme2.dao.FilmeDAO">
         <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
+    </bean>-->
     
     <bean id="avaliacaoBO" class="com.lab6.filme2.service.AvaliacaoBO">
         <property name="avaliacaoDAO" ref="avaliacaoDAO" />
