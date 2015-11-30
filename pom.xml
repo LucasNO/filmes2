@@ -14,6 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>4.12</junit.version>
         <org.springframework.version>4.1.5.RELEASE</org.springframework.version>
+        <org.springframework.data.version>1.9.1.RELEASE</org.springframework.data.version>
         <org.hibernate.version>4.3.8.Final</org.hibernate.version>
         <mysql.version>5.1.34</mysql.version>
         <jsf.version>2.2.7</jsf.version>
@@ -24,6 +25,15 @@
     </properties>
     
     <dependencies>
+        
+        <!-- Core -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+        
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
@@ -31,11 +41,19 @@
         </dependency>
         
         <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
             <groupId>net.sourceforge.jtds</groupId>
             <artifactId>jtds</artifactId>
             <version>${jtds.version}</version>
         </dependency>
-
+        
+        <!-- Spring -->
         <dependency> 
             <groupId>org.springframework</groupId> 
             <artifactId>spring-context</artifactId> 
@@ -46,6 +64,12 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
             <version>${org.springframework.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>${org.springframework.data.version}</version>
         </dependency>
         
         <dependency>
@@ -60,23 +84,31 @@
             <version>${org.springframework.version}</version>
         </dependency>
         
+        <!-- Spring security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${org.springframework.security.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${org.springframework.security.version}</version>
+        </dependency>
+        
+        <!-- Hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
+            <artifactId>hibernate-entitymanager</artifactId>
             <version>${org.hibernate.version}</version>
         </dependency>
         
+        <!-- Database Driver -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
         </dependency>
         
         <!-- JSF -->
@@ -98,26 +130,6 @@
             <artifactId>primefaces</artifactId>
             <version>${primefaces.version}</version>
         </dependency>
-        
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>7.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- Spring security -->
-
-        <dependency>
-             <groupId>org.springframework.security</groupId>
-             <artifactId>spring-security-web</artifactId>
-             <version>${org.springframework.security.version}</version>
-        </dependency>
-        
-        <dependency>
-             <groupId>org.springframework.security</groupId>
-             <artifactId>spring-security-config</artifactId>
-             <version>${org.springframework.security.version}</version>
-        </dependency>        
     </dependencies>
 
     <build>

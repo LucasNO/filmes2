@@ -27,43 +27,7 @@
 	  http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
 ">
     <context:annotation-config />
-    <context:component-scan base-package="br.org.sp.fatec.filmes" />
-    
-    <!-- Datasource -->
-    <bean id="dataSource" 
-          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://127.0.0.1:3306/locadora" />
-        <property name="username" value="root" />
-        <property name="password" value="root" />
-    </bean>
-    
-    <!-- Hibernate session factory -->
-    <bean id="sessionFactory" 
-          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-                <prop key="hibernate.show_sql">true</prop>
-                <prop key="hibernate.connection.autocommit">false</prop>
-            </props>
-        </property>
-        
-        <!-- Anotacoes -->
-        <property name="packagesToScan">
-            <list>
-                <value>com.lab6.filme2.model</value>
-            </list>
-        </property>
-    </bean>
-    
-    <bean id="transactionManager"
-          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
-    
-    <tx:annotation-driven />
+    <context:component-scan base-package="com.lab6.filme2" />
     
     <bean id="avaliacaoDAO" class="com.lab6.filme2.dao.AvaliacaoDAO">
         <property name="sessionFactory" ref="sessionFactory" />
