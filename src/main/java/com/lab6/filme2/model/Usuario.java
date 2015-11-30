@@ -23,7 +23,7 @@ import org.hibernate.annotations.LazyCollectionOption;
  */
 @Entity
 @Table(name = "USR_USUARIO")
-public class Usuario{
+public class Usuario {
 
 	@Id 
     @GeneratedValue

@@ -31,24 +31,10 @@
     <context:annotation-config />
     <context:component-scan base-package="com.lab6.filme2" />
     
-<!--    <bean id="avaliacaoDAO" class="com.lab6.filme2.dao.AvaliacaoDAO">
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
-    
-    <bean id="classificacaoDAO" class="com.lab6.filme2.dao.ClassificacaoDAO">
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean>-->
-    <bean id="permissaoDao" class="com.lab6.filme2.dao.PermissaoDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
-    
-    <bean id="usuarioDao" class="com.lab6.filme2.dao.UsuarioDaoImpl">
-        <property name="sessionFactory" ref="sessionFactory" />
-        <property name="permissaoDao" ref="permissaoDao" />
-    </bean>    
-<!--    <bean id="filmesDAO" class="com.lab6.filme2.dao.FilmeDAO">
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean>-->
+    <bean id="avaliacaoDAO" class="com.lab6.filme2.dao.AvaliacaoDAO"></bean>
+    <bean id="classificacaoDAO" class="com.lab6.filme2.dao.ClassificacaoDAO"></bean>
+    <bean id="filmesDAO" class="com.lab6.filme2.dao.FilmesDAO"></bean>
+    <bean id="usuarioDAO" class="com.lab6.filme2.dao.UsuarioDAO"></bean>
     
     <bean id="avaliacaoBO" class="com.lab6.filme2.service.AvaliacaoBO">
         <property name="avaliacaoDAO" ref="avaliacaoDAO" />
@@ -61,7 +47,15 @@
     <bean id="filmesBO" class="com.lab6.filme2.service.FilmesBO">
         <property name="filmesDAO" ref="filmesDAO" />
     </bean>
+    
+    <bean id="permissaoBO" class="com.lab6.filme2.service.PermissaoBO"></bean>
+    
+    <bean id="usuarioBO" class="com.lab6.filme2.service.UsuarioBO">
+        <property name="usuarioDAO" ref="usuarioDAO"/>
+        <property name="permissaoBO" ref="permissaoBO"/>
+    </bean>
+    
     <bean id="segurancaBO" class="com.lab6.filme2.service.SegurancaBOImpl">
-        <property name="usuarioDao" ref="usuarioDao"/>
-     </bean>
+        <property name="usuarioBO" ref="usuarioBO"/>
+    </bean>
 </beans>
