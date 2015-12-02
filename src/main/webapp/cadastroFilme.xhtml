@@ -10,8 +10,9 @@
         <f:event type="preRenderView" listener="#{filmesController.novo}"/>
     </f:metadata>
     <ui:define name="corpo">
-        <h:form>
-            <h:outputText>Cadastro De Filmes</h:outputText>
+        <h:form id="form">
+            <h1>Cadastro De Filmes</h1>
+            <p:growl id="msgs" showDetail="true"/>
 
             <p:panelGrid columns="2">
                 <p:outputLabel for="titulo" value="Nome: " />
@@ -19,12 +20,12 @@
             </p:panelGrid>
             <p:panelGrid columns="2">
                 <p:outputLabel for="classificacao" value="Classificação: " />
-                <p:selectOneMenu id="classificacao" value="#{filmesController.edicao.idclassificacao.idclassificacao}">
+                <p:selectOneMenu id="classificacao" value="#{filmesController.idGenero}">
                     <f:selectItems value="#{tipoController.resultado}" var="classificacao" itemLabel="#{classificacao.tipo}" itemValue="#{classificacao.idclassificacao}" />
                 </p:selectOneMenu>
             </p:panelGrid>
 
-            <p:commandButton value="Cadastrar" process="@all" action="#{filmesController.salvar}"/>
+            <p:commandButton id="btnCadastrar" value="Cadastrar" action="#{filmesController.salvar}" update="@form" process="@this titulo classificacao"/>
 
         </h:form>
     </ui:define>

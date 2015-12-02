@@ -2,6 +2,7 @@ package com.lab6.filme2.controller;
 
 import com.lab6.filme2.model.Classificacao;
 import com.lab6.filme2.model.Filmes;
+import com.lab6.filme2.service.ClassificacaoBO;
 import com.lab6.filme2.service.FilmesBO;
 import com.lab6.filme2.web.WebUtils;
 import java.util.List;
@@ -22,9 +23,12 @@ public class FilmesController {
     
     @ManagedProperty(value = "#{filmesBO}")
     private FilmesBO filmesBO;
+    @ManagedProperty(value = "#{classificacaoBO}")
+    private ClassificacaoBO classificacaoBO;
     private Boolean editar;
     private Filmes edicao;
     private List<Filmes> resultado;
+    private Long idGenero;
     
     public void novo() {
         editar = true;
@@ -35,6 +39,8 @@ public class FilmesController {
     public void salvar() {
 
         try {
+            Classificacao cla = classificacaoBO.carregarClassificacao(idGenero);
+            edicao.setIdclassificacao(cla);
             filmesBO.salvarFilme(edicao);
             editar = false;
             WebUtils.incluirMensagemInfo("Filme gravado com sucesso!");
@@ -114,5 +120,21 @@ public class FilmesController {
 
     public void setResultado(List<Filmes> resultado) {
         this.resultado = resultado;
+    }
+
+    public Long getIdGenero() {
+        return idGenero;
+    }
+
+    public void setIdGenero(Long idGenero) {
+        this.idGenero = idGenero;
+    }
+
+    public ClassificacaoBO getClassificacaoBO() {
+        return classificacaoBO;
+    }
+
+    public void setClassificacaoBO(ClassificacaoBO classificacaoBO) {
+        this.classificacaoBO = classificacaoBO;
     }
 }
