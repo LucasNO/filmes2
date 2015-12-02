@@ -48,7 +48,9 @@
         <property name="filmesDAO" ref="filmesDAO" />
     </bean>
     
-    <bean id="permissaoBO" class="com.lab6.filme2.service.PermissaoBO"></bean>
+    <bean id="permissaoBO" class="com.lab6.filme2.service.PermissaoBO">
+        <property name="permissaoDao" ref="permissaoDao"/>
+    </bean>
     
     <bean id="usuarioBO" class="com.lab6.filme2.service.UsuarioBO">
         <property name="usuarioDAO" ref="usuarioDAO"/>

@@ -25,10 +25,10 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Table(name = "USR_USUARIO")
 public class Usuario {
 
-	@Id 
+    @Id 
     @GeneratedValue
     @Column(name = "USR_ID")
-	private Long id;
+    private Long id;
     
     @Column(name = "USR_NOME", unique=true)
     private String nome;

@@ -10,7 +10,11 @@
         <h:outputStylesheet name="common-style.css" library="css" />
         <h:form>
             <p:toolbar>
-
+                <p:toolbarGroup>
+                    <p:menuButton value="Usuários">
+                        <p:menuitem id="cadastrarUsuario" value="Gerenciar Usuários" action="/usuario/cadastroUsuario?faces-redirect=true" />
+                    </p:menuButton>
+                </p:toolbarGroup>
                 <p:toolbarGroup>
                     <p:menuButton value="Generos">
                         <p:menuitem id="cadastrarGenero" value="Gerenciar Generos" action="/tipo/gerenciarTipos?faces-redirect=true" />

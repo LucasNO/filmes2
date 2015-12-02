@@ -51,4 +51,9 @@
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
+    
+    <error-page>
+        <error-code>403</error-code>
+        <location>/index.xhtml</location>
+    </error-page>
 </web-app>

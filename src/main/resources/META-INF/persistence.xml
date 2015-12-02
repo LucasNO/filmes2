@@ -5,6 +5,7 @@
     <class>com.lab6.filme2.model.Avaliacao</class>
     <class>com.lab6.filme2.model.Classificacao</class>
     <class>com.lab6.filme2.model.Filmes</class>
+    <class>com.lab6.filme2.controller.UsuarioController</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/locadora"/>

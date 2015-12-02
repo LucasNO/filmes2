@@ -20,6 +20,7 @@
         <sec:intercept-url pattern="/avaliacao/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')" />
         <sec:intercept-url pattern="/filme/**" access="hasRole('ROLE_ADMIN')" />
         <sec:intercept-url pattern="/tipo/**" access="hasRole('ROLE_ADMIN')" />
+        <sec:intercept-url pattern="/usuario/**" access="hasRole('ROLE_ADMIN')" />
         <sec:intercept-url pattern="/index.xhtml" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')" />
         
         <sec:csrf disabled="true"/>

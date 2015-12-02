@@ -1,0 +1,78 @@
+<ui:composition template="/template/common/commonLayout.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{usuarioController.listar}"/>
+        <f:event type="preRenderView" listener="#{usuarioController.listarPermissoes}"/>
+        <f:event type="preRenderView" listener="#{usuarioController.novo}"/>
+    </f:metadata>
+    <ui:define name="corpo">
+        <h:form id="form">
+            <h1>Cadastro De Usuários</h1>
+            <p:growl id="msgs" showDetail="true"/>
+
+            <p:panelGrid columns="2">
+                <p:outputLabel for="nome" value="Nome: " />
+                <p:inputText id="nome" value="#{usuarioController.usuario.nome}" required="true" />
+            </p:panelGrid>
+            <p:panelGrid columns="2">
+                <p:outputLabel for="senha" value="Senha: "/>
+                <p:inputText id="senha" value="#{usuarioController.usuario.senha}" type="password" required="true" />
+            </p:panelGrid>
+            <p:panelGrid columns="2">
+                <p:outputLabel for="permissao" value="Permissão: " />
+                <p:selectOneMenu id="permissao" value="#{usuarioController.idPermissao}" required="true" >
+                    <f:selectItems value="#{usuarioController.permissoes}" var="permissao" itemLabel="#{permissao.descricao}" itemValue="#{permissao.id}"/>
+                </p:selectOneMenu>
+            </p:panelGrid>
+
+            <p:commandButton id="btnCadastrar" value="Cadastrar" action="#{usuarioController.salvar}" update="@form" process="@this nome senha permissao"/>
+
+            <p:dataTable var="usu" value="#{usuarioController.resultado}"
+                         rows="5" paginator="true" editable="true">
+                
+                <p:ajax event="rowEdit" listener="#{usuarioController.onRowEdit}" update=":form:msgs" />
+                <p:ajax event="rowEditCancel" listener="#{usuarioController.onRowCancel}" update=":form:msgs" />
+
+                <p:column headerText="Id">
+                    <h:outputText value="#{usu.id}" />
+                </p:column>
+
+                <p:column headerText="Nome">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{usu.nome}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="modelInput" value="#{usu.nome}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Permissão">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{usu.permissoes.get(0)}" /></f:facet>
+                        <f:facet name="input">
+                            <p:selectOneMenu id="permissao" value="#{usuarioController.idPermissao}" required="true" >
+                                <f:selectItems value="#{usuarioController.permissoes}" var="permissao" itemLabel="#{permissao.descricao}" itemValue="#{permissao.id}" />
+                            </p:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="Alterar">
+                    <p:rowEditor />
+                </p:column>
+                
+                <p:column headerText="Deletar">
+                    <p:commandButton action="#{usuarioController.deletar}" icon="ui-icon-close" title="Remover Usuário" update="@form" process="@this" >
+                        <f:setPropertyActionListener
+                            target="#{usuarioController.usuario}"
+                            value="#{usu}" />
+                    </p:commandButton>
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>

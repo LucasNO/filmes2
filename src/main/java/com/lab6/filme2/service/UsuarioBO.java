@@ -10,6 +10,7 @@ import com.lab6.filme2.model.Usuario;
 import com.lab6.filme2.vo.UsuarioVO;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -23,6 +24,16 @@ public class UsuarioBO {
     public Usuario procurarPorNome(String nome) {
         
         return usuarioDAO.findByNome(nome);
+    }
+    
+    public List<Usuario> listarUsuarios() {
+        List<Usuario> lista = new ArrayList<>();
+            
+        for (Usuario item : usuarioDAO.findAll()) {
+            lista.add(item);
+        }
+            
+        return lista;
     }
 
     public UsuarioVO paraUsuarioVO(Usuario entidade) {
@@ -56,6 +67,26 @@ public class UsuarioBO {
     public void setPermissaoBO(PermissaoBO permissaoBO) {
         
         this.permissaoBO = permissaoBO;
+    }
+
+    public void salvarUsuario(Usuario usuario) {
+        this.usuarioDAO.save(usuario);
+    }
+
+    public Usuario carregarUsuario(Long id) {
+        return this.usuarioDAO.findOne(id);
+    }
+
+    public void editarClassificacao(Usuario usuario) {
+        this.usuarioDAO.save(usuario);
+    }
+
+    public void deletarUsuario(Usuario usuario) {
+        Usuario u = this.usuarioDAO.findOne(usuario.getId());
+	if (u == null) {
+            throw new RuntimeException("Nao existe usuario com esse id: " + usuario.getId());
+	}
+        this.usuarioDAO.delete(usuario);
     }
     
 }

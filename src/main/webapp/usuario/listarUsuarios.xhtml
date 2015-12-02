@@ -1,0 +1,34 @@
+<ui:composition template="/template/common/commonLayout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{usuarioController.listar}"/>
+        <f:event type="preRenderView" listener="#{usuarioController.novo}"/>
+    </f:metadata>
+    <ui:define name="corpo">
+
+        <h:form id="form">
+            <h1>Lista De Usuários</h1>
+
+            <p:dataTable var="usu" value="#{usuarioController.resultado}"
+                         rows="5" paginator="true">
+
+                <p:column headerText="Id">
+                    <h:outputText value="#{usu.nome}" />
+                </p:column>
+
+                <p:column headerText="Nome">
+                    <h:outputText value="#{usu.senha}" />
+                </p:column>
+
+                <p:column headerText="Permissão">
+                    <h:outputText value="" />
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>

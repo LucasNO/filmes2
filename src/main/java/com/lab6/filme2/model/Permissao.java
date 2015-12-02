@@ -53,4 +53,9 @@ public class Permissao {
 		this.descricao = descricao;
 	}
 
+    @Override
+    public String toString() {
+        return this.descricao; //To change body of generated methods, choose Tools | Templates.
+    }
+        
 }

@@ -5,6 +5,7 @@
  */
 package com.lab6.filme2.service;
 
+import com.lab6.filme2.dao.PermissaoDao;
 import com.lab6.filme2.model.Permissao;
 import com.lab6.filme2.vo.PermissaoVO;
 import java.util.ArrayList;
@@ -17,6 +18,8 @@ import java.util.List;
  */
 public class PermissaoBO {
 
+    private PermissaoDao permissaoDao;
+    
     public PermissaoVO paraPermissaoVO(Permissao entidade) {
 
         PermissaoVO permissaoVO = new PermissaoVO();
@@ -24,6 +27,18 @@ public class PermissaoBO {
         permissaoVO.setDescricao(entidade.getDescricao());
         
         return permissaoVO;
+    }
+    
+    
+
+    public List<Permissao> listarPermissoes() {
+        List<Permissao> lista = new ArrayList<>();
+            
+        for (Permissao item : permissaoDao.findAll()) {
+            lista.add(item);
+        }
+            
+        return lista;
     }
 
     public List<PermissaoVO> paraColecaoPermissaoVO(Collection<Permissao> entidades) {
@@ -37,4 +52,17 @@ public class PermissaoBO {
 
         return permissoesVO;
     }
+
+    public PermissaoDao getPermissaoDao() {
+        return permissaoDao;
+    }
+
+    public void setPermissaoDao(PermissaoDao permissaoDao) {
+        this.permissaoDao = permissaoDao;
+    }
+
+    public Permissao carregarClassificacao(Long idPermissao) {
+        return this.permissaoDao.findOne(idPermissao);
+    }
+    
 }

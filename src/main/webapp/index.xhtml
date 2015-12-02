@@ -32,6 +32,10 @@
                     <h:commandLink id="avaliacaoFilme" value="Avaliar Filme" action="/cadastroAvaliacao?faces-redirect=true" immediate="true" 
                         rendered="#{request.isUserInRole('ROLE_ADMIN') or request.isUserInRole('ROLE_USUARIO')}"/>
                     <br/>
+                    <br/>
+                    <h:commandLink id="cadastrarUsuario" value="Cadastar Usuário" action="/cadastroUsuario?faces-redirect=true" immediate="true" 
+                        rendered="#{request.isUserInRole('ROLE_ADMIN')}"/>
+                    <br/>
                     <h:outputLink value="#{facesContext.externalContext.requestContextPath}/logout">
                         <h:outputText value="Logout"/>
                     </h:outputLink>
