@@ -31,7 +31,7 @@ CREATE TABLE `avaliacao` (
   PRIMARY KEY (`idavaliacao`),
   KEY `fk_avaliacao_1_idx` (`idfilme`),
   CONSTRAINT `fk_avaliacao_1` FOREIGN KEY (`idfilme`) REFERENCES `filmes` (`idfilme`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `avaliacao` (
 
 LOCK TABLES `avaliacao` WRITE;
 /*!40000 ALTER TABLE `avaliacao` DISABLE KEYS */;
-INSERT INTO `avaliacao` VALUES (1,5,3);
+INSERT INTO `avaliacao` VALUES (1,5,3),(2,10,1);
 /*!40000 ALTER TABLE `avaliacao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -64,7 +64,7 @@ CREATE TABLE `classificacao` (
 
 LOCK TABLES `classificacao` WRITE;
 /*!40000 ALTER TABLE `classificacao` DISABLE KEYS */;
-INSERT INTO `classificacao` VALUES (1,'Aventura'),(2,'Ação'),(3,'Teste'),(4,'123'),(5,'dlnsclndc'),(6,'12345678'),(7,'nhgfdertyjioiuytrf'),(8,'Romance');
+INSERT INTO `classificacao` VALUES (1,'Aventura'),(2,'Ação'),(4,'Drama'),(8,'Romance');
 /*!40000 ALTER TABLE `classificacao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,7 +135,7 @@ CREATE TABLE `pus_permissao_usuario` (
   KEY `fk_PUS_PERMISSAO_USUARIO_2` (`PER_ID`),
   CONSTRAINT `fk_PUS_PERMISSAO_USUARIO_1` FOREIGN KEY (`USR_ID`) REFERENCES `usr_usuario` (`USR_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_PUS_PERMISSAO_USUARIO_2` FOREIGN KEY (`PER_ID`) REFERENCES `per_permissao` (`PER_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,7 +144,7 @@ CREATE TABLE `pus_permissao_usuario` (
 
 LOCK TABLES `pus_permissao_usuario` WRITE;
 /*!40000 ALTER TABLE `pus_permissao_usuario` DISABLE KEYS */;
-INSERT INTO `pus_permissao_usuario` VALUES (4,3,2),(5,1,1),(11,2,1),(14,6,1),(15,6,2),(16,6,3),(17,12,2),(18,12,3),(19,4,1),(20,4,2),(21,4,3);
+INSERT INTO `pus_permissao_usuario` VALUES (14,6,1),(15,6,2),(16,6,3),(19,4,1),(20,4,2),(21,4,3),(42,15,1),(43,15,2),(44,15,3),(45,2,1),(46,2,2),(47,2,3),(48,1,1),(49,1,2),(50,1,3),(51,3,1),(52,3,2),(53,3,3),(54,13,2),(55,14,2),(56,14,3);
 /*!40000 ALTER TABLE `pus_permissao_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,7 +160,7 @@ CREATE TABLE `usr_usuario` (
   `USR_SENHA` varchar(45) NOT NULL,
   `USR_NOME` varchar(45) NOT NULL,
   PRIMARY KEY (`USR_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -169,7 +169,7 @@ CREATE TABLE `usr_usuario` (
 
 LOCK TABLES `usr_usuario` WRITE;
 /*!40000 ALTER TABLE `usr_usuario` DISABLE KEYS */;
-INSERT INTO `usr_usuario` VALUES (1,'123','thiago'),(2,'123','lucas'),(3,'123','tarcisio'),(4,'123','ronan'),(6,'123','nicodemos'),(12,'123','teste');
+INSERT INTO `usr_usuario` VALUES (1,'123','thiago'),(2,'123','lucas'),(3,'123','tarcisio'),(4,'123','ronan'),(6,'123','nicodemos'),(13,'123','teste'),(14,'123','teste2'),(15,'123','teste3');
 /*!40000 ALTER TABLE `usr_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,4 +186,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-03 12:49:12
+-- Dump completed on 2015-12-03 13:15:42

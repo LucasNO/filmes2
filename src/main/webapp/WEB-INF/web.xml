@@ -54,6 +54,6 @@
     
     <error-page>
         <error-code>403</error-code>
-        <location>/index.xhtml</location>
+        <location>/erro.xhtml</location>
     </error-page>
 </web-app>

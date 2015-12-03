@@ -35,12 +35,9 @@
             <p:dataTable var="usu" value="#{usuarioController.resultado}"
                          rows="5" paginator="true" editable="true">
                 
-                    <p:ajax event="rowEditInit" oncomplete="$('.ui-row-editor span.ui-icon-pencil').each(function(){$(this).css('visibility','hidden')});" />
-                    <p:ajax event="rowEdit" oncomplete="$('.ui-row-editor span.ui-icon-pencil').each(function(){$(this).css('visibility','visible')});"/>   
-                    <p:ajax event="rowEditCancel" onstart="$('.ui-row-editor span.ui-icon-pencil').each(function(){$(this).css('visibility','visible')});"/>
-                
-                <p:ajax event="rowEdit" listener="#{usuarioController.onRowEdit}" update=":form:msgs" />
-                <p:ajax event="rowEditCancel" listener="#{usuarioController.onRowCancel}" update=":form:msgs" />
+                <p:ajax event="rowEditInit" oncomplete="$('.ui-row-editor span.ui-icon-pencil').each(function(){$(this).css('visibility','hidden')});" />
+                <p:ajax event="rowEdit" listener="#{usuarioController.onRowEdit}" update=":form:msgs" oncomplete="$('.ui-row-editor span.ui-icon-pencil').each(function(){$(this).css('visibility','visible')});" />
+                <p:ajax event="rowEditCancel" listener="#{usuarioController.onRowCancel}" update=":form:msgs" onstart="$('.ui-row-editor span.ui-icon-pencil').each(function(){$(this).css('visibility','visible')});" />
 
                 <p:column headerText="Id">
                     <h:outputText value="#{usu.id}" />
