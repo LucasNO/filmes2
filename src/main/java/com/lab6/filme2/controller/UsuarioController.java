@@ -35,12 +35,18 @@ public class UsuarioController {
     private Usuario usuario;
     private List<Usuario> resultado;
     private List<Permissao> permissoes;
+    private List<Long> permissoesSelecionadas;
     private Long idPermissao;
+    
+    {
+        resultado = new ArrayList<>();
+    }
     
     public void novo() {
         editar = true;
         usuario = new Usuario();
         usuario.setPermissoes(new ArrayList<Permissao>());
+        setPermissoesSelecionadas(new ArrayList<Long>());
     }
     
     public void listar() {
@@ -53,8 +59,12 @@ public class UsuarioController {
     
     public void salvar() {
         try {
-            Permissao p = permissaoBO.carregarClassificacao(idPermissao);
-            usuario.getPermissoes().add(p);
+            
+            for (Long permissaoSelecionada : permissoesSelecionadas) {
+                
+                usuario.getPermissoes().add(permissaoBO.carregarClassificacao(permissaoSelecionada));
+            }
+            
             usuarioBO.salvarUsuario(usuario);
             editar = false;
             WebUtils.incluirMensagemInfo("Usuário gravado com sucesso!");
@@ -80,17 +90,22 @@ public class UsuarioController {
         usuario.setNome(((Usuario) event.getObject()).getNome());
         usuario.setSenha(((Usuario) event.getObject()).getSenha());
         
-        Permissao p = permissaoBO.carregarClassificacao(idPermissao);
-        List<Permissao> lista = new ArrayList<Permissao>();
-        lista.add(p);
-        usuario.setPermissoes(lista);
+        List<Permissao> lista = new ArrayList<>();
         
+        for (Long permissaoSelecionada : permissoesSelecionadas) {
+            
+            lista.add(permissaoBO.carregarClassificacao(permissaoSelecionada));
+        }
+        
+        usuario.setPermissoes(lista);
         usuarioBO.editarClassificacao(usuario);
+        permissoesSelecionadas.clear();
         FacesMessage msg = new FacesMessage("Usuário Editado", ((Usuario) event.getObject()).getNome());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
      
     public void onRowCancel(RowEditEvent event) {
+        permissoesSelecionadas.clear();
         FacesMessage msg = new FacesMessage("Edição Cancelada", ((Usuario) event.getObject()).getNome());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
@@ -150,4 +165,14 @@ public class UsuarioController {
     public void setIdPermissao(Long idPermissao) {
         this.idPermissao = idPermissao;
     }
+
+    public List<Long> getPermissoesSelecionadas() {
+        return permissoesSelecionadas;
+    }
+
+    public void setPermissoesSelecionadas(List<Long> permissoesSelecionadas) {
+        this.permissoesSelecionadas = permissoesSelecionadas;
+    }
+    
+    
 }

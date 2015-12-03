@@ -17,11 +17,11 @@
     <sec:http auto-config="true" use-expressions="true">
 
          <!--Restring acesso a pasta seguro /seguro/**--> 
-        <sec:intercept-url pattern="/avaliacao/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')" />
-        <sec:intercept-url pattern="/filme/**" access="hasRole('ROLE_ADMIN')" />
-        <sec:intercept-url pattern="/tipo/**" access="hasRole('ROLE_ADMIN')" />
         <sec:intercept-url pattern="/usuario/**" access="hasRole('ROLE_ADMIN')" />
-        <sec:intercept-url pattern="/index.xhtml" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')" />
+        <sec:intercept-url pattern="/tipo/**" access="hasRole('ROLE_FUNCIONARIO')" />
+        <sec:intercept-url pattern="/filme/**" access="hasRole('ROLE_FUNCIONARIO')" />
+        <sec:intercept-url pattern="/avaliacao/**" access="hasRole('ROLE_USUARIO')" />
+        <sec:intercept-url pattern="/index.xhtml" access="hasAnyRole('ROLE_ADMIN', 'ROLE_FUNCIONARIO', 'ROLE_USUARIO')" />
         
         <sec:csrf disabled="true"/>
     </sec:http>

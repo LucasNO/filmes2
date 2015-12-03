@@ -57,7 +57,7 @@ public class PermissaoVO implements Serializable, GrantedAuthority  {
 
 	@Override
 	public String getAuthority() {
-		return getDescricao();
+		return "ROLE_" + getDescricao();
 	}
 
 }

@@ -27,6 +27,10 @@
             <p:dataTable id="tipoTable" var="car" value="#{tipoController.resultado}"
                          rows="5" paginator="true" editable="true">
 
+                <p:ajax event="rowEditInit" oncomplete="$('.ui-row-editor span.ui-icon-pencil').each(function(){$(this).css('visibility','hidden')});" />
+                <p:ajax event="rowEdit" oncomplete="$('.ui-row-editor span.ui-icon-pencil').each(function(){$(this).css('visibility','visible')});"/>   
+                <p:ajax event="rowEditCancel" onstart="$('.ui-row-editor span.ui-icon-pencil').each(function(){$(this).css('visibility','visible')});"/>
+                
                 <p:ajax event="rowEdit" listener="#{tipoController.onRowEdit}" update=":form:msgs" />
                 <p:ajax event="rowEditCancel" listener="#{tipoController.onRowCancel}" update=":form:msgs" />
 
